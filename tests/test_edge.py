@@ -2,7 +2,7 @@ from dataclasses import replace
 from datetime import UTC, datetime, timedelta
 from decimal import Decimal as D
 
-from z2.core.edge import Level, OrderBook, Policy, assess_cross_exchange
+from z2.core.edge import assess_cross_exchange, Level, OrderBook, Policy
 
 
 NOW = datetime(2026, 11, 5, 6, 0, tzinfo=UTC)
