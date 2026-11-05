@@ -10,10 +10,9 @@ from collections.abc import AsyncIterator, Callable, Mapping
 from datetime import UTC, datetime
 from decimal import Decimal, InvalidOperation
 from importlib import import_module
-from typing import Any
+from typing import Any, Self
 
 from z2.core.edge import Level, OrderBook
-
 
 SUPPORTED_PUBLIC_EXCHANGES = frozenset(
     {
@@ -110,7 +109,7 @@ def _default_exchange_factory(exchange_id: str, config: dict[str, Any]) -> Any:
         raise RuntimeError("Install the 'ccxt' package to enable CCXT Pro streams") from exc
     exchange_class = getattr(ccxtpro, exchange_id, None)
     if not callable(exchange_class):
-        raise ValueError(f"CCXT Pro adapter is unavailable for {exchange_id}")
+        raise RuntimeError(f"CCXT Pro adapter is unavailable for {exchange_id}")
     return exchange_class(config)
 
 
@@ -191,7 +190,7 @@ class CCXTProPublicAdapter:
         if exchange is not None:
             await exchange.close()
 
-    async def __aenter__(self) -> CCXTProPublicAdapter:
+    async def __aenter__(self) -> Self:
         await self.connect()
         return self
 
