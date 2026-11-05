@@ -1,11 +1,10 @@
 from dataclasses import replace
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from decimal import Decimal as D
 
 from z2.core.edge import Level, OrderBook, Policy, assess_cross_exchange
 
-
-NOW = datetime(2026, 11, 5, 6, 0, tzinfo=timezone.utc)
+NOW = datetime(2026, 11, 5, 6, 0, tzinfo=UTC)
 
 
 def book(venue, *, bid, ask, ts=NOW, qty="10", latency="10"):

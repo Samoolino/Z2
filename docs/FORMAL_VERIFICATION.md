@@ -5,6 +5,8 @@ Formal methods apply to the rules and state transitions Z2 controls. They do not
 ## TLA+ / TLC — concurrent execution protocol
 
 Model:
+A first draft model is in `specs/ExecutionProtocol.tla`, with a bounded TLC configuration in `specs/ExecutionProtocol.cfg`. It models a single submission intent, not the complete two-leg arbitrage protocol. It has not yet been checked by TLC; extend it for both legs, partial fills, hedging/unwind and restart recovery before any live pilot.
+
 - cycle lifecycle: IDLE -> PREFLIGHT -> RESERVED -> SUBMITTING -> PARTIAL/UNKNOWN -> HEDGING/UNWINDING -> RECONCILED;
 - per-account active-cycle lock;
 - durable idempotency keys;

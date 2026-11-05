@@ -60,7 +60,7 @@ Recommended split:
 - PostgreSQL for durable opportunity, order/fill and reconciliation records.
 - Reuse Redis Streams or EMQX as the canonical event transport.
 
-Do not run the trading loop inside a Vercel Function. Vercel Functions have bounded invocation duration and do not support acting as a WebSocket server. Replit Reserved VM is the closer fit for persistent processes; deployment uptime, restarts and recovery still require operational testing.
+Do not run the continuous exchange market-data or execution worker inside a Vercel Function. Vercel announced Node.js WebSocket support in public beta in June 2026, and eligible Node.js/Python Functions can run for bounded durations (up to 30 minutes on qualifying Pro/Enterprise Fluid Compute configurations). This is not a substitute for a supervised, continuously running exchange-feed worker. Use Replit Reserved VM (or a dedicated always-on service) for the CCXT Pro worker; deployment uptime, restarts and recovery still require operational testing.
 
 ## Delivery phases
 
@@ -70,8 +70,11 @@ Observe-only API, dashboard, Decimal cross-venue assessment, timestamp/latency/d
 ### P1 — scanner ingestion
 Obtain Arbitrage Gap's official API/feed/export schema. Until then use user-exported CSV/manual records and mark them UNVERIFIED_EXTERNAL_SIGNAL.
 
-### P2 — independent market data
-Add direct CEX WebSocket adapters, normalized order books, sequence recovery and provider APIs for CoinGecko/CMC as secondary context.
+### P2 — independent market data (in progress)
+- Initial read-only CCXT Pro public spot order-book adapter is implemented in `src/z2/adapters/ccxt_pro.py`. It uses an allowlisted exchange factory, active spot-market checks, exchange timestamps (missing timestamps fail closed), Decimal level normalization and public-only connection configuration.
+- Adapter tests use a fake exchange; no live credentials or orders are involved.
+- Not yet implemented: persistent shared subscriptions, reconnect/backoff supervisor, sequence-gap recovery, Redis Streams transport, API/WebSocket dashboard integration and CoinGecko/CMC reference-data adapters.
+- Next: build the supervisor and event bus around this adapter, then independently assess refreshed books through the Decimal verifier.
 
 ### P3 — opportunity engine
 Match signals to canonical markets, independently refresh books, depth-walk size and compute executable net edge after all costs.

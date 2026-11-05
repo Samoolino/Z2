@@ -93,7 +93,7 @@ Recommended split:
 - PostgreSQL: durable opportunity, order/fill and reconciliation records.
 - Redis Streams or EMQX: event transport. Reuse existing infrastructure where possible; avoid duplicate brokers without a measured need.
 
-Do not run the trading loop inside a Vercel Function. Vercel Functions have bounded invocation duration and do not support acting as a WebSocket server. If Vercel is selected for the UI, the execution worker must run elsewhere.
+Do not run the continuous exchange market-data or execution worker inside a Vercel Function. Vercel announced Node.js WebSocket support in public beta in June 2026, and eligible Node.js/Python Functions can run for bounded durations (up to 30 minutes on qualifying Pro/Enterprise Fluid Compute configurations). This is not a substitute for a supervised, continuously running exchange-feed worker. If Vercel is selected for the UI or realtime client gateway, run the CCXT Pro worker on a Replit Reserved VM or another dedicated always-on service.
 
 ## Verification
 
