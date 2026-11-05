@@ -60,7 +60,7 @@ Recommended split:
 - PostgreSQL for durable opportunity, order/fill and reconciliation records.
 - Reuse Redis Streams or EMQX as the canonical event transport.
 
-Do not run the trading loop inside a Vercel Function. Vercel Functions have bounded invocation duration and do not support acting as a WebSocket server. Replit Reserved VM is the closer fit for persistent processes; deployment uptime, restarts and recovery still require operational testing.
+Do not run the continuous exchange market-data or execution worker inside a Vercel Function. Vercel announced Node.js WebSocket support in public beta in June 2026, and eligible Node.js/Python Functions can run for bounded durations (up to 30 minutes on qualifying Pro/Enterprise Fluid Compute configurations). This is not a substitute for a supervised, continuously running exchange-feed worker. Use Replit Reserved VM (or a dedicated always-on service) for the CCXT Pro worker; deployment uptime, restarts and recovery still require operational testing.
 
 ## Delivery phases
 
