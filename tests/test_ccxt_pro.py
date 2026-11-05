@@ -59,7 +59,7 @@ def test_normalize_ccxt_book_uses_exchange_timestamp_and_decimal_levels():
     assert book.exchange_ts == NOW
     assert book.received_ts == received
     assert book.latency_ms == D(12)
-    assert book.bids[0].price == D("100")
+    assert book.bids[0].price == D(100)
     assert book.asks[0].quantity == D("2.0")
 
 
@@ -96,7 +96,7 @@ def test_normalize_rejects_empty_or_invalid_book_levels():
         normalize_ccxt_order_book(
             "binance",
             "BTC/USDT",
-            {**raw_book(), "bids": [[D("NaN"), D("1")]]},
+            {**raw_book(), "bids": [[D("NaN"), D(1)]]},
             received_ts=NOW,
         )
 
