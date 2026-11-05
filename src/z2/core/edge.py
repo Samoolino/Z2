@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
-from collections.abc import Iterable
 
 BPS = Decimal(10000)
 ZERO = Decimal(0)
