@@ -108,8 +108,10 @@ def _default_exchange_factory(exchange_id: str, config: dict[str, Any]) -> Any:
     except ImportError as exc:
         raise RuntimeError("Install the 'ccxt' package to enable CCXT Pro streams") from exc
     exchange_class = getattr(ccxtpro, exchange_id, None)
+    if exchange_class is None:
+        raise ValueError(f"CCXT Pro adapter is unavailable for {exchange_id}")
     if not callable(exchange_class):
-        raise RuntimeError(f"CCXT Pro adapter is unavailable for {exchange_id}")
+        raise TypeError(f"CCXT Pro adapter for {exchange_id} is not callable")
     return exchange_class(config)
 
 
