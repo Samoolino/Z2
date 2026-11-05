@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <title>Z2 · Arbitrage Intelligence</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">Z2</span><span><b>Z2</b><small>ARBITRAGE INTELLIGENCE</small></span></div>
+      <nav aria-label="Primary navigation">
+        <a class="active" href="#overview">Overview</a>
+        <a href="#sources">Data sources</a>
+        <a href="#opportunities">Opportunities</a>
+        <a href="#controls">Execution controls</a>
+        <a href="/docs">API & contracts ↗</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="pulse"></span>
+        <div><b>Control plane</b><small id="connection-state">Checking service…</small></div>
+      </div>
+    </aside>
+
+    <main id="overview">
+      <header class="topbar">
+        <div><span class="eyebrow">MULTI-VENUE MARKET OPERATIONS</span><h1>Arbitrage command center</h1></div>
+        <div class="top-actions"><span class="mode-pill"><i></i> OBSERVE ONLY</span><button id="refresh" class="button secondary">↻ Refresh status</button></div>
+      </header>
+
+      <section class="notice" role="status">
+        <div class="notice-icon">!</div>
+        <div><b>Live execution is disabled</b><p>Z2 is currently validating its data and opportunity contracts. No exchange orders are submitted from this interface.</p></div>
+      </section>
+
+      <section class="metrics">
+        <article class="metric"><span>Verified opportunities</span><strong>—</strong><small>Waiting for independent live books</small></article>
+        <article class="metric"><span>Connected venues</span><strong id="venue-count">0</strong><small>Runtime-verified adapters only</small></article>
+        <article class="metric"><span>Active orders</span><strong>0</strong><small>Order submission disabled</small></article>
+        <article class="metric"><span>Risk gate</span><strong class="text-green">CLOSED</strong><small>Observe-only safety state</small></article>
+      </section>
+
+      <section id="sources" class="section">
+        <div class="section-heading"><div><span class="eyebrow">INGESTION & CONNECTIVITY</span><h2>Data sources and engines</h2></div><span class="subtle" id="last-checked">Not checked yet</span></div>
+        <div class="source-grid" id="source-grid">
+          <article class="source-card"><div class="source-head"><span class="source-symbol">AG</span><span class="state pending">NOT CONFIGURED</span></div><h3>Arbitrage Gap</h3><p>External scanner discovery. Requires a vendor-approved feed/API or exported scanner data.</p><small>Signal source · not an execution broker</small></article>
+          <article class="source-card"><div class="source-head"><span class="source-symbol">CG</span><span class="state pending">NOT CONFIGURED</span></div><h3>CoinGecko</h3><p>Asset identity, broad market prices, volume and market context.</p><small>Reference data · not executable order-book depth</small></article>
+          <article class="source-card"><div class="source-head"><span class="source-symbol">CMC</span><span class="state pending">NOT CONFIGURED</span></div><h3>CoinMarketCap</h3><p>Independent reference prices, market data and derivatives context.</p><small>Reference data · server-side API key required</small></article>
+          <article class="source-card"><div class="source-head"><span class="source-symbol">NU</span><span class="state pending">NOT CONFIGURED</span></div><h3>NU-ARB engine</h3><p>Existing multi-exchange scanner and controlled execution service.</p><small>Execution adapter · authenticated service connection</small></article>
+          <article class="source-card"><div class="source-head"><span class="source-symbol">HB</span><span class="state pending">NOT CONFIGURED</span></div><h3>Hummingbot / A2</h3><p>Existing strategy, CEX connector and Gateway orchestration.</p><small>Execution adapter · authenticated Hummingbot API</small></article>
+          <article class="source-card"><div class="source-head"><span class="source-symbol">KV</span><span class="state pending">NOT CONFIGURED</span></div><h3>Credential vault</h3><p>Exchange keys must be stored server-side with least privilege and encryption.</p><small>Never enter API secrets into this browser page</small></article>
+        </div>
+      </section>
+
+      <section class="two-col">
+        <article id="opportunities" class="panel">
+          <div class="section-heading"><div><span class="eyebrow">INDEPENDENT VERIFICATION</span><h2>Opportunity queue</h2></div><span class="state pending">NO LIVE FEED</span></div>
+          <div class="empty-state"><div class="empty-icon">⌁</div><b>No independently verified opportunities</b><p>Scanner signals will appear here only after Z2 refreshes both venues' order books, validates depth, fees, timestamps and balances.</p></div>
+          <div class="table-foot"><span>External scanner signals are never executable instructions.</span><a href="/docs">Assessment API ↗</a></div>
+        </article>
+
+        <article id="controls" class="panel">
+          <div class="section-heading"><div><span class="eyebrow">DETERMINISTIC SAFETY</span><h2>Execution controls</h2></div><span class="state blocked">DISARMED</span></div>
+          <ul class="check-list">
+            <li><span>Fresh, synchronized order books</span><b>Pending</b></li>
+            <li><span>Depth-walked executable quantity</span><b>Pending</b></li>
+            <li><span>Fees, slippage and rebalance costs</span><b>Pending</b></li>
+            <li><span>Exchange permissions and balances</span><b>Pending</b></li>
+            <li><span>Risk limits and kill switch</span><b>Observe only</b></li>
+            <li><span>Order/fill reconciliation</span><b>Not connected</b></li>
+          </ul>
+          <div class="agent-note"><span class="agent-icon">✳</span><div><b>Agentic assistance</b><p>AI can interpret signals and propose strategies. It cannot approve, sign or submit orders.</p></div></div>
+        </article>
+      </section>
+
+      <footer><span>Z2 · Arbitrage Intelligence & Execution Orchestrator</span><span>Evidence first · No guaranteed-profit claims</span></footer>
+    </main>
+  </div>
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>
