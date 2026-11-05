@@ -21,6 +21,6 @@ jobs:
       - name: Install project and test tools
         run: python -m pip install -e ".[dev]"
       - name: Lint
-        run: ruff check --fix src tests && git diff -- src tests
+        run: ruff check src tests
       - name: Test
         run: pytest -q
