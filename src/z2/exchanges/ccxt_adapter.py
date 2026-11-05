@@ -5,7 +5,7 @@ import importlib
 import re
 import time
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from decimal import Decimal
 from typing import Any, Literal
 
@@ -118,14 +118,14 @@ def normalize_order_book(
     if not bids or not asks:
         raise ValueError("both sides of the order book are required")
 
-    exchange_ts = datetime.fromtimestamp(timestamp_ms / 1000, tz=timezone.utc)
+    exchange_ts = datetime.fromtimestamp(timestamp_ms / 1000, tz=UTC)
     return OrderBook(
         venue=exchange_id,
         symbol=symbol,
         bids=bids,
         asks=asks,
         exchange_ts=exchange_ts,
-        received_ts=received_at.astimezone(timezone.utc),
+        received_ts=received_at.astimezone(UTC),
         latency_ms=latency_ms,
     )
 
@@ -146,7 +146,7 @@ async def fetch_order_book(
         exchange_id=exchange_id,
         symbol=symbol,
         raw=raw,
-        received_at=datetime.now(timezone.utc),
+        received_at=datetime.now(UTC),
         latency_ms=latency_ms,
     )
 
@@ -167,7 +167,7 @@ async def watch_order_book(
         exchange_id=exchange_id,
         symbol=symbol,
         raw=raw,
-        received_at=datetime.now(timezone.utc),
+        received_at=datetime.now(UTC),
         latency_ms=latency_ms,
     )
 

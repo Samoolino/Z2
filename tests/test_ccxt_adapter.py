@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from decimal import Decimal
 from types import SimpleNamespace
 
@@ -77,7 +77,7 @@ def test_config_hides_secrets_from_repr():
 
 
 def test_normalize_order_book_uses_exchange_timestamp_and_decimal_levels():
-    received = datetime(2026, 11, 5, 9, 0, tzinfo=timezone.utc)
+    received = datetime(2026, 11, 5, 9, 0, tzinfo=UTC)
     book = normalize_order_book(
         exchange_id="binance",
         symbol="BTC/USDT",
@@ -94,7 +94,7 @@ def test_normalize_order_book_uses_exchange_timestamp_and_decimal_levels():
     assert book.symbol == "BTC/USDT"
     assert book.bids[0].price == Decimal("99.10")
     assert book.asks[0].quantity == Decimal("2.5")
-    assert book.exchange_ts.tzinfo == timezone.utc
+    assert book.exchange_ts.tzinfo == UTC
     assert book.received_ts == received
 
 
@@ -103,7 +103,7 @@ def test_normalize_order_book_rejects_missing_exchange_timestamp():
         normalize_order_book(
             exchange_id="binance", symbol="BTC/USDT",
             raw={"bids": [["99", "1"]], "asks": [["100", "1"]]},
-            received_at=datetime.now(timezone.utc), latency_ms=Decimal("1"),
+            received_at=datetime.now(UTC), latency_ms=Decimal(1),
         )
 
 
@@ -113,7 +113,7 @@ def test_normalize_order_book_rejects_symbol_mismatch():
             exchange_id="binance", symbol="BTC/USDT",
             raw={"symbol": "ETH/USDT", "timestamp": 1793869200000,
                  "bids": [["99", "1"]], "asks": [["100", "1"]]},
-            received_at=datetime.now(timezone.utc), latency_ms=Decimal("1"),
+            received_at=datetime.now(UTC), latency_ms=Decimal(1),
         )
 
 
@@ -122,5 +122,5 @@ def test_normalize_order_book_rejects_incomplete_depth():
         normalize_order_book(
             exchange_id="binance", symbol="BTC/USDT",
             raw={"timestamp": 1793869200000, "bids": [], "asks": [["100", "1"]]},
-            received_at=datetime.now(timezone.utc), latency_ms=Decimal("1"),
+            received_at=datetime.now(UTC), latency_ms=Decimal(1),
         )
