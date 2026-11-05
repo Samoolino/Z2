@@ -42,6 +42,7 @@ def status():
             {"id": "arbitragegap", "state": "UNCONFIGURED", "method": "vendor-approved API or manual CSV"},
             {"id": "coingecko", "state": "UNCONFIGURED", "method": "server-side public API"},
             {"id": "coinmarketcap", "state": "UNCONFIGURED", "method": "server-side API key"},
+            {"id": "ccxt", "state": "UNCONFIGURED", "method": "CCXT async REST / Pro WebSocket"},
             {"id": "nu-arb", "state": "UNCONFIGURED", "method": "authenticated service adapter"},
             {"id": "hummingbot", "state": "UNCONFIGURED", "method": "Hummingbot API adapter"},
         ],
