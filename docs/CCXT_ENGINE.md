@@ -17,7 +17,7 @@ This change adds the first CCXT connection and order-book normalization layer. I
 - `close_exchange` releases exchange sessions and sockets.
 - No function in this module calls `create_order`, `createOrder`, transfer, withdrawal or account-funding methods.
 
-CCXT Pro's WebSocket interface is documented as part of the CCXT distribution. Verify the exact exchange capability flags and parameters for every pinned CCXT version and venue: https://docs.ccxt.com/docs/pro-manual
+CCXT Pro is included in the free, MIT-licensed CCXT package; it adds WebSocket streaming without a separate paid package. Verify the exact exchange capability flags and parameters for every pinned CCXT version and venue: https://docs.ccxt.com/docs/pro-manual
 
 ## Credential boundary
 
@@ -106,9 +106,9 @@ Redis is a transport/cache, not the authoritative trade ledger. PostgreSQL is th
 ## Deployment
 
 Recommended production split:
-- Replit Reserved VM (or a dedicated always-on VM) for CCXT WebSocket clients, market-data workers and execution orchestration.
+- Replit Reserved VM (or a dedicated always-on VM) is the recommended home for CCXT WebSocket clients, market-data workers and execution orchestration. Replit documents Reserved VM for always-on APIs and background workers.
 - PostgreSQL and Redis as managed services or private Docker services with persistent volumes and backups.
-- Vercel may host the static/operator UI and short request/response endpoints. Vercel Functions do not act as WebSocket servers, so do not run the always-on CCXT feed loop there.
+- Vercel WebSocket support is now generally available, so it can host the operator UI's realtime WebSocket gateway. However, each connection is pinned to a Function instance and ends at that Function's maximum duration; use external Redis/pub-sub for cross-instance state and reconnection. Do not rely on a Function as the persistent market-feed or execution worker.
 - Use Docker Compose for local integration and single-host staging. Do not expose Postgres, Redis or NATS publicly.
 
 The repository's current API is observe-only. Compose provisions local dependencies; database and stream adapters must be wired and migrated before treating persistence as active.
