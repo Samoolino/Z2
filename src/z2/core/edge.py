@@ -5,8 +5,8 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Iterable
 
-BPS = Decimal("10000")
-ZERO = Decimal("0")
+BPS = Decimal(10000)
+ZERO = Decimal(0)
 
 
 @dataclass(frozen=True, slots=True)
@@ -28,13 +28,13 @@ class OrderBook:
 
 @dataclass(frozen=True, slots=True)
 class Policy:
-    min_expected_net_bps: Decimal = Decimal("5")
-    min_worst_case_net_bps: Decimal = Decimal("1")
-    max_book_age_ms: Decimal = Decimal("500")
-    max_book_skew_ms: Decimal = Decimal("150")
-    max_latency_ms: Decimal = Decimal("100")
-    slippage_reserve_bps: Decimal = Decimal("2")
-    max_notional_quote: Decimal = Decimal("100")
+    min_expected_net_bps: Decimal = Decimal(5)
+    min_worst_case_net_bps: Decimal = Decimal(1)
+    max_book_age_ms: Decimal = Decimal(500)
+    max_book_skew_ms: Decimal = Decimal(150)
+    max_latency_ms: Decimal = Decimal(100)
+    slippage_reserve_bps: Decimal = Decimal(2)
+    max_notional_quote: Decimal = Decimal(100)
 
 
 @dataclass(frozen=True, slots=True)
