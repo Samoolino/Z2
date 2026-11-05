@@ -1,5 +1,5 @@
 from dataclasses import replace
-from datetime import datetime, timedelta, UTC
+from datetime import UTC, datetime, timedelta
 from decimal import Decimal as D
 
 from z2.core.edge import Level, OrderBook, Policy, assess_cross_exchange
