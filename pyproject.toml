@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "z2-arbitrage-orchestrator"
+version = "0.1.0"
+description = "Verified arbitrage opportunity intelligence and execution orchestration"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.30,<1",
+  "pydantic>=2.8,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "hypothesis>=6", "httpx>=0.27", "ruff>=0.6"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/z2"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
