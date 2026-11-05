@@ -70,8 +70,11 @@ Observe-only API, dashboard, Decimal cross-venue assessment, timestamp/latency/d
 ### P1 — scanner ingestion
 Obtain Arbitrage Gap's official API/feed/export schema. Until then use user-exported CSV/manual records and mark them UNVERIFIED_EXTERNAL_SIGNAL.
 
-### P2 — independent market data
-Add direct CEX WebSocket adapters, normalized order books, sequence recovery and provider APIs for CoinGecko/CMC as secondary context.
+### P2 — independent market data (in progress)
+- Initial read-only CCXT Pro public spot order-book adapter is implemented in `src/z2/adapters/ccxt_pro.py`. It uses an allowlisted exchange factory, active spot-market checks, exchange timestamps (missing timestamps fail closed), Decimal level normalization and public-only connection configuration.
+- Adapter tests use a fake exchange; no live credentials or orders are involved.
+- Not yet implemented: persistent shared subscriptions, reconnect/backoff supervisor, sequence-gap recovery, Redis Streams transport, API/WebSocket dashboard integration and CoinGecko/CMC reference-data adapters.
+- Next: build the supervisor and event bus around this adapter, then independently assess refreshed books through the Decimal verifier.
 
 ### P3 — opportunity engine
 Match signals to canonical markets, independently refresh books, depth-walk size and compute executable net edge after all costs.
