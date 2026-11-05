@@ -88,7 +88,9 @@ Start Codex from the repository root:
 codex
 ```
 
-Use the repository's `AGENTS.md` and the docs listed above as the authoritative project contract. Work in small, reviewable stages. Follow TDD for every behavior change: write a failing test first, observe RED, implement the smallest GREEN change, refactor, then run the focused and full suites. Do not claim tests, Docker checks, exchange connectivity or proofs passed unless the command was actually run and its output was inspected.
+Use the repository's `AGENTS.md`, the project skill at `.agents/skills/z2-core-engine/SKILL.md`, and the docs listed above as the authoritative project contract. Codex discovers project skills under `.agents/skills/`; use the `z2-core-engine` skill for engine and trading-path work. Work in small, reviewable stages. Follow TDD for every behavior change: write a failing test first, observe RED, implement the smallest GREEN change, refactor, then run the focused and full suites. Do not claim tests, Docker checks, exchange connectivity or proofs passed unless the command was actually run and its output was inspected.
+
+Optional Codex plugin support: inside Codex, run `/plugins`, search for **OpenAI Developers**, and install it if available. It provides OpenAI API documentation and Agents SDK guidance. This does not import ChatGPT's connected CoinGecko, CoinMarketCap, Slack, GitHub or Upstash sessions into WSL; those services need their own supported MCP/plugin configuration and authorization. Keep exchange trading keys outside the LLM tool surface.
 
 Recommended first prompt:
 
