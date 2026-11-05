@@ -130,3 +130,10 @@ Formal verification can prove properties of the model and implementation under s
 - Samoolino/A2 — Hummingbot, Gateway, Condor and EMQX orchestration.
 
 Integration is by authenticated, versioned service contracts. No credentials or live-order authority are shared with the LLM.
+
+
+## CCXT engine foundation
+
+The first CCXT adapter is in `src/z2/exchanges/ccxt_adapter.py`. It creates isolated asynchronous REST or CCXT Pro clients, accepts optional server-side credentials, defaults to sandbox mode, normalizes timestamped order books to Decimal and exposes no order-submission method. See [docs/CCXT_ENGINE.md](docs/CCXT_ENGINE.md) for the credential boundary, scanner licensing rules, Docker Compose stack, messaging design, live-execution gates and Codex CLI workflow.
+
+Local infrastructure: copy `.env.example` to `.env`, change `POSTGRES_PASSWORD`, then run `docker compose up --build`. PostgreSQL and Redis are provisioned for the next persistence/event-bus phase; the current API does not yet write to them. Optional NATS JetStream can be started with `docker compose --profile nats up --build`.

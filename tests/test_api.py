@@ -55,3 +55,13 @@ def test_evaluation_endpoint_never_submits_orders():
     assert response.status_code == 200
     assert response.json()["eligible"] is True
     assert response.json()["execution"] == "NOT_SUBMITTED"
+
+
+def test_status_includes_ccxt_adapter_without_enabling_trading():
+    response = TestClient(app).get("/api/v1/status")
+    assert response.status_code == 200
+    body = response.json()
+    ccxt = next(item for item in body["connectors"] if item["id"] == "ccxt")
+    assert ccxt["state"] == "UNCONFIGURED"
+    assert body["order_submission_enabled"] is False
+    assert body["live_trading_enabled"] is False

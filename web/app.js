@@ -21,6 +21,7 @@ async function refreshStatus() {
       arbitragegap: "Arbitrage Gap",
       coingecko: "CoinGecko",
       coinmarketcap: "CoinMarketCap",
+      ccxt: "CCXT exchange engine",
       "nu-arb": "NU-ARB engine",
       hummingbot: "Hummingbot / A2",
     };
