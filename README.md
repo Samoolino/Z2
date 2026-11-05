@@ -13,7 +13,7 @@ Z2 is a complete agentic, multi-exchange arbitrage platform. It extends the Arbi
 - **Execution:** paired-order coordinator, per-account risk gates, partial-fill hedging, order-state recovery and reconciliation.
 - **Operations:** exchange universe, live scanner, strategy cockpit, execution terminal, risk center and audit timeline.
 
-Read [docs/MULTI_EXCHANGE_AGENTIC_PLATFORM.md](docs/MULTI_EXCHANGE_AGENTIC_PLATFORM.md) for the complete product contract and delivery gates. Read [docs/CCXT_ENGINE.md](docs/CCXT_ENGINE.md) for the current adapter and connector boundaries.
+Read [docs/MULTI_EXCHANGE_AGENTIC_PLATFORM.md](docs/MULTI_EXCHANGE_AGENTIC_PLATFORM.md) for the complete product contract, [docs/CCXT_ENGINE.md](docs/CCXT_ENGINE.md) for connector boundaries, and [docs/CODEX_CLI_WSL_HANDOFF.md](docs/CODEX_CLI_WSL_HANDOFF.md) for the staged Codex CLI implementation workflow in WSL2.
 
 ## Non-negotiable boundaries
 
