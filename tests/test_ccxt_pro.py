@@ -6,16 +6,17 @@ import pytest
 
 from z2.adapters.ccxt_pro import CCXTProPublicAdapter, normalize_ccxt_order_book
 
-
 NOW = datetime(2026, 11, 5, 7, 0, tzinfo=UTC)
 
 
-def raw_book(*, timestamp=NOW.timestamp() * 1000, symbol="BTC/USDT"):
+def raw_book(*, timestamp=None, symbol="BTC/USDT"):
+    if timestamp is None:
+        timestamp = NOW.timestamp() * 1000
     return {
         "symbol": symbol,
         "timestamp": timestamp,
-        "bids": [[D("100"), D("1.5")]],
-        "asks": [[D("101"), D("2.0")]],
+        "bids": [[D(100), D("1.5")]],
+        "asks": [[D(101), D("2.0")]],
     }
 
 
